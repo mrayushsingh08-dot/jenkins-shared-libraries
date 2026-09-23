@@ -1,8 +1,8 @@
 def call(String sonarServer, String projectKey, String projectName) {
     withSonarQubeEnv("${sonarServer}") {
-        def scannerHome = tool 'sonar-scanner'
+        def scannerHome = tool 'sonar'
         sh """
-            ${scannerHome}/bin/sonar-scanner \
+            ${scannerHome}/bin/sonar \
                 -Dsonar.projectKey=${projectKey} \
                 -Dsonar.projectName=${projectName} \
                 -Dsonar.sources=.
