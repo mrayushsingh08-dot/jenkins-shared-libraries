@@ -1,5 +1,6 @@
 def call() {
     dependencyCheck(
+        odcInstallation: 'OWASP',
         additionalArguments: '--scan ./'
     )
 
