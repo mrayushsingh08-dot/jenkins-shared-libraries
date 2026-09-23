@@ -1,11 +1,12 @@
-def call(String sonarServer, String projectKey, String projectName) {
-    withSonarQubeEnv("${sonarServer}") {
-        def scannerHome = tool 'sonar-scanner'
-        sh """
-            ${scannerHome}/bin/sonar-scanner \
-                -Dsonar.projectKey=${projectKey} \
-                -Dsonar.projectName=${projectName} \
-                -Dsonar.sources=.
-        """
+def call() {
+    catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE') {
+        dependencyCheck(
+            odcInstallation: 'OWASP',
+            additionalArguments: '--scan ./ --noupdate'
+        )
+
+        dependencyCheckPublisher(
+            pattern: '**/dependency-check-report.xml'
+        )
     }
 }
