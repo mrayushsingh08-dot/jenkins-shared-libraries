@@ -4,6 +4,7 @@ def call() {
 
     dependencyCheck(
         odcInstallation: 'OWASP',
+        nvdCredentialsId: 'nvd-api-key',
         additionalArguments: '''
             --scan .
             --format XML
@@ -14,6 +15,7 @@ def call() {
     )
 
     dependencyCheckPublisher(
-        pattern: 'dependency-check-report/dependency-check-report.xml'
+        pattern: 'dependency-check-report/dependency-check-report.xml',
+        skipNoReportFiles: false
     )
 }
